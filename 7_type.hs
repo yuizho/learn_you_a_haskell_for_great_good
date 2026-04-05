@@ -51,3 +51,9 @@ instance (Eq m) => Eq (MyMaybe m) where
   MyJust x == MyJust y = x == y
   MyNothing == MyNothing = True
   _ == _ = False
+
+-- 7.10 Functor
+instance Functor Tree where
+  fmap f EmptyTree = EmptyTree
+  fmap f (Node x left right) =
+    Node (f x) (fmap f left) (fmap f right)
