@@ -1,0 +1,5 @@
+# Haskell build artifacts
+*.o
+*.hi
+build/
+bin/
