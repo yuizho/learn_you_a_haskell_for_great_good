@@ -8,11 +8,18 @@ type Birds = Int
 
 type Pole = (Birds, Birds)
 
-landLeft :: Birds -> Pole -> Pole
-landLeft n (left, right) = (left + n, right)
+landLeft :: Birds -> Pole -> Maybe Pole
+landLeft n (left, right)
+  | abs ((left + n) - right) < 4 = Just (left + n, right)
+  | otherwise = Nothing
 
-landRight :: Birds -> Pole -> Pole
-landRight n (left, right) = (left, right + n)
+landRight :: Birds -> Pole -> Maybe Pole
+landRight n (left, right)
+  | abs (left - (right + n)) < 4 = Just (left, right + n)
+  | otherwise = Nothing
+
+-- モナドにしたことで前の結果を取り出して次にも適用できる (文脈をパスできる)
+-- return (0, 0) >>= landRight 2 >>= landLeft 2 >>= landRight 2
 
 -- (0, 0) -: landLeft 1 -: landRight 1 -: landLeft 2
 x -: f = f x
