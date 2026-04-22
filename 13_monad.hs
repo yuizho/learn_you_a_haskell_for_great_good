@@ -21,5 +21,11 @@ landRight n (left, right)
 -- モナドにしたことで前の結果を取り出して次にも適用できる (文脈をパスできる)
 -- return (0, 0) >>= landRight 2 >>= landLeft 2 >>= landRight 2
 
+banana :: Pole -> Maybe Pole
+banana _ = Nothing
+
+-- バナナを使うといきなりピエールはバランスを崩す
+-- return (0, 0) >>= landRight 2 >>= banana >>= landRight 2
+
 -- (0, 0) -: landLeft 1 -: landRight 1 -: landLeft 2
 x -: f = f x
