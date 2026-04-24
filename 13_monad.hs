@@ -29,3 +29,25 @@ banana _ = Nothing
 
 -- (0, 0) -: landLeft 1 -: landRight 1 -: landLeft 2
 x -: f = f x
+
+routine :: Maybe Pole
+routine = do
+  start <- return (0, 0)
+  first <- landLeft 2 start
+  -- <-で変数束縛せずにモナド使うと無視したいモナドのあとに >> をつけるのとおなじになる
+  -- Nothing
+  second <- landRight 2 first
+  landLeft 1 second
+
+-- 13.5.1
+maySue :: Maybe Bool
+maySue = do
+  x <- Just 9
+  Just (x > 8)
+
+-- 13.5.3
+justStr :: String -> Maybe Char
+justStr s = do
+  -- 空文字とか来るとNothingがかえる
+  (x : xs) <- Just s
+  return x
