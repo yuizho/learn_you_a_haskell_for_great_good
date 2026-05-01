@@ -26,3 +26,11 @@ gcd' a b
   | otherwise = do
       tell [show a ++ " mod " ++ show b ++ " = " ++ show (a `mod` b)]
       gcd' b (a `mod` b)
+
+-- 14.2.2
+-- 関数モナドはすべての引数が共通の情報を読むのでReaderモナドとも呼ばれる
+addStaff :: Int -> Int
+addStaff = do
+  a <- (* 2) -- addstaffへの引数を読む
+  b <- (+ 10) -- これもaddstaffへの引数を読む
+  return (a + b)
