@@ -34,3 +34,17 @@ addStaff = do
   a <- (* 2) -- addstaffへの引数を読む
   b <- (+ 10) -- これもaddstaffへの引数を読む
   return (a + b)
+
+-- 14.3.2
+type Stack = [Int]
+
+pop :: Stack -> (Int, Stack)
+pop (x : xs) = (x, xs)
+
+push :: Int -> Stack -> ((), Stack)
+push a xs = ((), a : xs)
+
+stackManip = do
+  push 3
+  a <- pop
+  pop
